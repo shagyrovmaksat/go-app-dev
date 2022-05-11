@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "./api";
+
+package proto;
+
+service Reverser {
+  rpc Reverse(ReverseRequest) returns (ReverseResponse) {}
+}
+
+message ReverseRequest {
+  string message = 1;
+}
+
+message ReverseResponse {
+  string result = 1;
+}

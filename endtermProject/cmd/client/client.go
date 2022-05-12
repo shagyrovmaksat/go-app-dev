@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	api "endtermProject/course"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
+	"os"
 )
 
 var mainMenu = "Enter number of action:\n" +
@@ -31,7 +33,7 @@ func main() {
 	var courseAuthor string
 	var courseCategory string
 	var courseCost int
-
+	reader := bufio.NewReader(os.Stdin)
 	for {
 		if !run {
 			break
@@ -45,13 +47,13 @@ func main() {
 			fmt.Println("Enter course id: ")
 			fmt.Scanln(&courseId)
 			fmt.Println("Enter course title: ")
-			fmt.Scanln(&courseTitle)
+			courseTitle, err = reader.ReadString('\n')
 			fmt.Println("Enter course description: ")
-			fmt.Scanln(&courseDescription)
+			courseDescription, err = reader.ReadString('\n')
 			fmt.Println("Enter course author: ")
-			fmt.Scanln(&courseAuthor)
+			courseAuthor, err = reader.ReadString('\n')
 			fmt.Println("Enter course category: ")
-			fmt.Scanln(&courseCategory)
+			courseCategory, err = reader.ReadString('\n')
 			fmt.Println("Enter course cost: ")
 			fmt.Scanf("%d", &courseCost)
 
@@ -91,14 +93,14 @@ func main() {
 			fmt.Println("Enter course id: ")
 			fmt.Scanln(&courseId)
 			fmt.Println("Enter course title: ")
-			fmt.Scanln(&courseTitle)
+			courseTitle, err = reader.ReadString('\n')
 			fmt.Println("Enter course description: ")
-			fmt.Scanln(&courseDescription)
+			courseDescription, err = reader.ReadString('\n')
 			fmt.Println("Enter course author: ")
-			fmt.Scanln(&courseAuthor)
+			courseAuthor, err = reader.ReadString('\n')
 			fmt.Println("Enter course category: ")
-			fmt.Scanln(&courseCategory)
-			fmt.Println("Enter course id: ")
+			courseCategory, err = reader.ReadString('\n')
+			fmt.Println("Enter course cost: ")
 			fmt.Scanf("%d", &courseCost)
 
 			updateCourseResponse, err := c.UpdateCourse(context.Background(), &api.UpdateCourseRequest{
